@@ -53,11 +53,8 @@ export default function Header() {
   return (
     <header className="border-b border-border bg-card">
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center space-x-2" data-testid="link-logo">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">AN</span>
-          </div>
-          <span className="font-semibold text-lg text-foreground">AskNewton</span>
+        <Link href="/" className="flex items-center" data-testid="link-logo">
+          <img src="/asknewton-logo.svg" alt="askNewton" width="112" height="24" className="h-6" />
         </Link>
         
         <NavLinks />

@@ -16,16 +16,18 @@ export default function Traveler() {
             Back to home
           </Button>
         </Link>
-        <h1 className="text-4xl font-bold text-foreground mb-6">Traveler: 1–6 month stays</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">For Travelers — straightforward U.S. medical coverage for 1–6 months.</h1>
+        <p className="text-lg text-muted-foreground mb-8">
+          If you want <strong>emergency-ready protection</strong> without overpaying, start here.
+        </p>
+        <ul className="text-muted-foreground space-y-2 mb-8">
+          <li>• Know what travel medical really covers in U.S. hospitals.</li>
+          <li>• Clear claims instructions before you fly.</li>
+          <li>• Family add-ons and adventure-sports checks.</li>
+        </ul>
       </div>
 
       <div className="prose prose-lg max-w-none space-y-8">
-        <Card className="bg-secondary/10 border-secondary/20">
-          <CardContent className="p-6">
-            <h2 className="text-xl font-semibold text-foreground mb-4">Your situation</h2>
-            <p className="text-muted-foreground">You're visiting California for tourism, business, or temporary work. You need simple, reliable coverage without the complexity of long-term insurance.</p>
-          </CardContent>
-        </Card>
 
         <div>
           <h2 className="text-2xl font-semibold text-foreground mb-4">Travel medical insurance</h2>

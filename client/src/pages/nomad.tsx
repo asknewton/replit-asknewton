@@ -16,16 +16,18 @@ export default function Nomad() {
             Back to home
           </Button>
         </Link>
-        <h1 className="text-4xl font-bold text-foreground mb-6">Nomad: Remote workers, founders, contractors</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">For Nomads in California — get covered while you settle in.</h1>
+        <p className="text-lg text-muted-foreground mb-8">
+          If you're a remote worker or founder and want <strong>straight answers on travel vs short-term vs marketplace</strong>, start here.
+        </p>
+        <ul className="text-muted-foreground space-y-2 mb-8">
+          <li>• Avoid gotchas: networks, ER bills, pre-existing exclusions.</li>
+          <li>• Options within 24h, matched to your arrival and address status.</li>
+          <li>• Proof-of-coverage guidance for visas and co-working.</li>
+        </ul>
       </div>
 
       <div className="prose prose-lg max-w-none space-y-8">
-        <Card className="bg-accent/10 border-accent/20">
-          <CardContent className="p-6">
-            <h2 className="text-xl font-semibold text-foreground mb-4">Your situation</h2>
-            <p className="text-muted-foreground">You're location-independent, working remotely, running a business, or freelancing. You might be here for a few months or testing out California before making it permanent.</p>
-          </CardContent>
-        </Card>
 
         <div>
           <h2 className="text-2xl font-semibold text-foreground mb-4">Insurance options overview</h2>

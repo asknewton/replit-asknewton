@@ -15,16 +15,18 @@ export default function Student() {
             Back to home
           </Button>
         </Link>
-        <h1 className="text-4xl font-bold text-foreground mb-6">Student: F-1 / J-1 or transfers</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">For Students — SHIP vs private plans, waivers made simple.</h1>
+        <p className="text-lg text-muted-foreground mb-8">
+          If you want <strong>waiver-ready coverage</strong> and <strong>dependent options</strong>, start here.
+        </p>
+        <ul className="text-muted-foreground space-y-2 mb-8">
+          <li>• Avoid waiver denials and missed deadlines.</li>
+          <li>• Network near campus + dental/vision add-ons.</li>
+          <li>• Immunization/TB compliance pointers.</li>
+        </ul>
       </div>
 
       <div className="prose prose-lg max-w-none space-y-8">
-        <Card className="bg-accent/10 border-accent/20">
-          <CardContent className="p-6">
-            <h2 className="text-xl font-semibold text-foreground mb-4">Your situation</h2>
-            <p className="text-muted-foreground">You're studying in California on a student visa, transferring schools, or bringing dependents. You need to meet university requirements while finding affordable coverage.</p>
-          </CardContent>
-        </Card>
 
         <div>
           <h2 className="text-2xl font-semibold text-foreground mb-4">Insurance options</h2>

@@ -13,12 +13,12 @@ export default function Home() {
     <div className="space-y-10">
       {/* Hero Section */}
       <section className="text-center space-y-6 py-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-          Health insurance for your<br />
-          first months in California.
+        <h1 className="text-3xl sm:text-4xl font-semibold text-foreground mb-6">
+          Health insurance for newcomers to California.
         </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-          Simple guidance, clear options, and human help—for Nomads, Travelers, and Students arriving in the Golden State.
+        <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          If you are a <strong>Nomad</strong>, <strong>Traveler</strong>, or <strong>Student</strong> and want
+          <strong> clear, fast coverage guidance</strong> with <strong>human help</strong>, start here.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
           <Link href="/start">
@@ -82,7 +82,7 @@ export default function Home() {
           <PersonaCard
             persona="nomad"
             title="Nomad"
-            description="Bridge coverage until you establish residency or employer benefits. Understand travel vs. marketplace vs. short-term options."
+            description="For remote workers/founders staying 3–12+ months who want bridge coverage until residency or employer benefits."
             icon={<Laptop className="w-8 h-8 text-white" />}
             gradientFrom="from-primary"
             gradientTo="to-accent"
@@ -91,7 +91,7 @@ export default function Home() {
           <PersonaCard
             persona="traveler"
             title="Traveler"
-            description="Short stays need simple protection. Know what travel medical covers (and what it doesn't) during your California visit."
+            description="For 1–6 month visitors who want simple protection that actually works in U.S. hospitals."
             icon={<Globe className="w-8 h-8 text-white" />}
             gradientFrom="from-secondary"
             gradientTo="to-accent"
@@ -100,7 +100,7 @@ export default function Home() {
           <PersonaCard
             persona="student"
             title="Student"
-            description="Make sense of university plans, waivers, private options, and dependents. Navigate F-1/J-1 requirements with confidence."
+            description="For F-1/J-1 students who want waiver-ready plans and dependent options."
             icon={<GraduationCap className="w-8 h-8 text-white" />}
             gradientFrom="from-accent"
             gradientTo="to-primary"
