@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { leadSchema } from "@shared/schema";
 import { z } from "zod";
+import { sendLeadNotification, type LeadNotificationData } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Lead submission endpoint
@@ -29,8 +30,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
-      // Send email notification
-      await sendEmailNotification(lead);
+      // Send email notification using SendGrid
+      await sendLeadNotification(lead);
 
       res.status(201).json({ success: true, leadId: lead.id });
     } catch (error) {
@@ -66,60 +67,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   const httpServer = createServer(app);
   return httpServer;
-}
-
-async function sendEmailNotification(lead: any) {
-  const emailApiKey = process.env.EMAIL_API_KEY;
-  const notifyTo = process.env.NOTIFY_TO;
-  
-  if (!emailApiKey || !notifyTo) {
-    console.log('Email notification skipped - missing configuration');
-    return;
-  }
-
-  try {
-    const subject = `New ${lead.persona} lead - ${lead.name}`;
-    const html = `
-      <h2>New Lead Submission</h2>
-      <h3>Contact Information</h3>
-      <p><strong>Name:</strong> ${lead.name}</p>
-      <p><strong>Email:</strong> ${lead.email}</p>
-      <p><strong>Phone:</strong> ${lead.phone || 'Not provided'}</p>
-      <p><strong>Persona:</strong> ${lead.persona}</p>
-      
-      <h3>Stay Details</h3>
-      <p><strong>Arrival Date:</strong> ${lead.arrivalDate}</p>
-      <p><strong>Stay Length:</strong> ${lead.stayLength}</p>
-      <p><strong>Visa Status:</strong> ${lead.status || 'Not provided'}</p>
-      <p><strong>ZIP Code:</strong> ${lead.zip}</p>
-      <p><strong>Address:</strong> ${lead.address || 'Not provided'}</p>
-      
-      <h3>Insurance Information</h3>
-      <p><strong>Current Coverage:</strong> ${lead.currentCoverage}</p>
-      <p><strong>Pre-existing Conditions:</strong> ${lead.preexisting ? 'Yes' : 'No'}</p>
-      <p><strong>Dependents:</strong> ${lead.dependents}</p>
-      
-      <h3>Additional Information</h3>
-      <p><strong>Budget/Network Preferences:</strong> ${lead.budgetOrNetwork || 'Not provided'}</p>
-      <p><strong>Notes:</strong> ${lead.notes || 'None'}</p>
-      
-      <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
-    `;
-
-    await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${emailApiKey}`
-      },
-      body: JSON.stringify({
-        from: 'AskNewton <noreply@asknewton.com>',
-        to: [notifyTo],
-        subject,
-        html
-      })
-    });
-  } catch (error) {
-    console.error('Email sending error:', error);
-  }
 }

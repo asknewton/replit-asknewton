@@ -34,13 +34,18 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
   }
 
   try {
-    const mail = {
+    const mail: any = {
       to: params.to,
       from: params.from,
       subject: params.subject,
-      ...(params.text ? { text: params.text } : {}),
-      ...(params.html ? { html: params.html } : {}),
     };
+    
+    if (params.text) {
+      mail.text = params.text;
+    }
+    if (params.html) {
+      mail.html = params.html;
+    }
     
     await service.send(mail);
     console.log(`Email sent successfully to ${params.to}`);
@@ -56,13 +61,13 @@ export interface LeadNotificationData {
   persona: string;
   name: string;
   email: string;
-  phone: string;
+  phone: string | null;
   arrivalDate: string;
   stayLength: string;
   currentCoverage: string;
   preexisting: boolean;
   notes?: string | null;
-  createdAt: string;
+  createdAt: string | Date | null;
 }
 
 export async function sendLeadNotification(leadData: LeadNotificationData): Promise<boolean> {
@@ -89,13 +94,13 @@ Lead Details:
 - Persona: ${lead.persona.toUpperCase()}
 - Name: ${lead.name}
 - Email: ${lead.email}
-- Phone: ${lead.phone}
+- Phone: ${lead.phone || 'Not provided'}
 - Arrival Date: ${lead.arrivalDate}
 - Stay Length: ${lead.stayLength}
 - Current Coverage: ${lead.currentCoverage}
 - Pre-existing Conditions: ${lead.preexisting ? 'Yes' : 'No'}
 - Notes: ${lead.notes || 'None'}
-- Submitted: ${new Date(lead.createdAt).toLocaleString()}
+- Submitted: ${lead.createdAt ? new Date(lead.createdAt).toLocaleString() : 'Unknown'}
 
 Follow up with this lead promptly!
   `.trim();
@@ -118,13 +123,13 @@ function generateLeadEmailHtml(lead: LeadNotificationData): string {
               <tr><td style="padding: 8px 0; font-weight: bold;">Persona:</td><td style="padding: 8px 0; text-transform: uppercase; color: #2563eb;">${lead.persona}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Name:</td><td style="padding: 8px 0;">${lead.name}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Email:</td><td style="padding: 8px 0;"><a href="mailto:${lead.email}">${lead.email}</a></td></tr>
-              <tr><td style="padding: 8px 0; font-weight: bold;">Phone:</td><td style="padding: 8px 0;"><a href="tel:${lead.phone}">${lead.phone}</a></td></tr>
+              <tr><td style="padding: 8px 0; font-weight: bold;">Phone:</td><td style="padding: 8px 0;">${lead.phone ? `<a href="tel:${lead.phone}">${lead.phone}</a>` : 'Not provided'}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Arrival Date:</td><td style="padding: 8px 0;">${lead.arrivalDate}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Stay Length:</td><td style="padding: 8px 0;">${lead.stayLength}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Current Coverage:</td><td style="padding: 8px 0;">${lead.currentCoverage}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Pre-existing Conditions:</td><td style="padding: 8px 0;">${lead.preexisting ? 'Yes' : 'No'}</td></tr>
               <tr><td style="padding: 8px 0; font-weight: bold;">Notes:</td><td style="padding: 8px 0;">${lead.notes || 'None'}</td></tr>
-              <tr><td style="padding: 8px 0; font-weight: bold;">Submitted:</td><td style="padding: 8px 0;">${new Date(lead.createdAt).toLocaleString()}</td></tr>
+              <tr><td style="padding: 8px 0; font-weight: bold;">Submitted:</td><td style="padding: 8px 0;">${lead.createdAt ? new Date(lead.createdAt).toLocaleString() : 'Unknown'}</td></tr>
             </table>
           </div>
           
